@@ -1,0 +1,26 @@
+{
+	"name": "racketondeck",
+	"version": "1.0.0",
+	"description": "This README would normally document whatever steps are necessary to get your application up and running.",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"format": "biome format packages/*",
+		"lint": "biome lint packages/*",
+		"lint:staged": "lint-staged",
+		"prepare": "husky"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@biomejs/biome": "^1.8.3",
+		"lerna": "^8.1.7"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^19.3.0",
+		"@commitlint/config-conventional": "^19.2.2",
+		"husky": "^9.1.4",
+		"lint-staged": "^15.2.8"
+	}
+}
