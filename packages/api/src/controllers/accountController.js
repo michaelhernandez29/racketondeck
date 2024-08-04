@@ -1,0 +1,39 @@
+import _ from 'lodash-es';
+import accountService from '../services/accountService.js';
+import cryptoHelper from '../helpers/cryptoHelper.js';
+import errorCodes from '../constants/errorCodes.js';
+import errorMessages from '../constants/errorMessages.js';
+import responseHelper from '../helpers/responseHelper.js';
+import roleTypes from '../constants/roleTypes.js';
+import userService from '../services/userService.js';
+import userTypes from '../constants/userTypes.js';
+import validator from 'validator';
+
+/**
+ * Handler for POST /accounts
+ *
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
+const create = async (req, res) => {
+	const payload = req.body;
+
+	if (!validator.isEmail(payload.email)) {
+		responseHelper.badRequest(res, errorMessages.EMAIL_FORMAT_INVALID);
+		return;
+	}
+
+	const user = await userService.findByEmail(payload.email, { raw: true });
+	if (user) {
+		responseHelper.conflict(res, errorMessages.EMAIL_ALREADY_EXISTS, errorCodes.CONFLICT);
+		return;
+	}
+
+	const passwordHashed = await cryptoHelper.hash(payload.password);
+	const data = { ...payload, password: passwordHashed, roleType: roleTypes.ACCOUNT_OWNER, userType: userTypes.MANAGER };
+	let response = await accountService.create(data);
+	response = _.omit(response, 'password');
+	responseHelper.created(res, response);
+};
+
+export { create };

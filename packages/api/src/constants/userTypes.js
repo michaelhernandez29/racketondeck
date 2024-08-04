@@ -1,0 +1,5 @@
+export default {
+	MANAGER: 'MANAGER',
+	INSTRUCTOR: 'INSTRUCTOR',
+	PLAYER: 'PLAYER',
+};

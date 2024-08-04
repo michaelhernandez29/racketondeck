@@ -1,0 +1,48 @@
+PostAccountRequestBody:
+  type: object
+  properties:
+    name:
+      type: string
+      description: The name of the academy.
+      example: Padel Academy
+    email:
+      type: string
+      description: The email address of the user.
+      example: john.doe@example.com
+    password:
+      type: string
+      description: The password for the user account.
+      example: strongpassword123
+  required:
+    - name
+    - email
+    - password
+  additionalProperties: false
+
+AccountResponse:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier of the created account.
+      example: 123456
+    createdAt:
+      type: string
+      format: date-time
+      description: The creation date of the account.
+      example: 2024-08-04T12:34:56Z
+    updatedAt:
+      type: string
+      format: date-time
+      description: The last update date of the account.
+      example: 2024-08-04T12:34:56Z
+    enabled:
+      type: boolean
+      description: Indicates whether the account is enabled.
+      example: true
+  required:
+    - id
+    - createdAt
+    - updatedAt
+    - enabled
+  additionalProperties: false

@@ -1,0 +1,125 @@
+BadRequestResponse:
+  description: Bad Request - Invalid input parameters.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            description: The status code of the response.
+            example: 400
+          message:
+            type: string
+            description: A message indicating the error.
+            example: Bad Request
+          errorCode:
+            type: string
+            description: The specific error code.
+            enum:
+              - BAD_REQUEST
+
+UnauthorizedResponse:
+  description: Unauthorized - Authentication is required.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            description: The status code of the response.
+            example: 401
+          message:
+            type: string
+            description: A message indicating the error.
+            example: Unauthorized
+          errorCode:
+            type: string
+            description: The specific error code.
+            enum:
+              - UNAUTHORIZED
+
+ForbiddenResponse:
+  description: Forbidden - The user does not have the necessary permissions.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            description: The status code of the response.
+            example: 403
+          message:
+            type: string
+            description: A message indicating the error.
+            example: Forbidden
+          errorCode:
+            type: string
+            description: The specific error code.
+            enum:
+              - FORBIDDEN
+
+NotFoundResponse:
+  description: Not Found - The requested resource was not found.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            description: The status code of the response.
+            example: 404
+          message:
+            type: string
+            description: A message indicating the error.
+            example: Not Found
+          errorCode:
+            type: string
+            description: The specific error code.
+            enum:
+              - NOT_FOUND
+
+ConflictResponse:
+  description: Conflict - The request could not be completed due to a conflict with the current state of the resource.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            description: The status code of the response.
+            example: 409
+          message:
+            type: string
+            description: A message indicating the error.
+            example: Conflict
+          errorCode:
+            type: string
+            description: The specific error code.
+            enum:
+              - CONFLICT
+
+InternalServerErrorResponse:
+  description: Internal Server Error - An unexpected error occurred.
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            description: The status code of the response.
+            example: 500
+          message:
+            type: string
+            description: A message indicating the error.
+            example: Internal Server Error
+          errorCode:
+            type: string
+            description: The specific error code.
+            enum:
+              - INTERNAL_SERVER_ERROR
