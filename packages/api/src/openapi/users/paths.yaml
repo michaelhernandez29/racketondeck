@@ -1,16 +1,24 @@
-/accounts:
+/accounts/{accountId}/users:
   post:
     tags:
-      - Accounts 📝
-    summary: Create a new account
-    description: Endpoint to create a new user account in the application.
-    x-eov-operation-handler: accountController
+      - Users 👨‍🏫
+    summary: Create a new user in an account
+    description: Endpoint to create a new user associated with a specific account.
+    x-eov-operation-handler: userController
     operationId: create
+    parameters:
+      - name: accountId
+        in: path
+        description: The account's id.
+        required: true
+        schema:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
     requestBody:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PostAccountRequestBody'
+            $ref: '#/components/schemas/PostUserRequestBody'
       required: true
     responses:
       201:
@@ -30,7 +38,7 @@
                   example: Created
                   default: Created
                 data:
-                  $ref: '#/components/schemas/AccountResponse'
+                  $ref: '#/components/schemas/UserResponse'
               required:
                 - statusCode
                 - message

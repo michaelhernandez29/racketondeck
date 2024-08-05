@@ -1,6 +1,18 @@
 import user from '../models/user.js';
 
 /**
+ * Creates a new user.
+ *
+ * @param {object} data - The data for the new user.
+ * @returns {Promise<object>} A promise that resolves to the newly created user object in plain format.
+ * @throws {Error} Throws an error if the creation fails.
+ */
+const create = async (data) => {
+	const response = await user.create(data);
+	return response.get({ plain: true });
+};
+
+/**
  * Finds a user by their email address.
  *
  * @param {string} email - The email address of the user to find.
@@ -15,4 +27,4 @@ const findByEmail = async (email, params) => {
 	return user.findOne({ where: { email }, ...params });
 };
 
-export default { findByEmail };
+export default { create, findByEmail };

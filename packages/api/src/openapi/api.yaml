@@ -9,13 +9,11 @@ tags:
     description: Operations related to managing user accounts.
   - name: User Authentication 🔐
     description: Operations related to managing user authentication and security.
-  - name: Staff 👨‍🏫
-    description: Operations related to managing staff members within the academy.
-  - name: Players 🧑‍🤝‍🧑
-    description: Operations related to managing players and their activities.
+  - name: Users 👨‍🏫
+    description: Operations related to managing staff members and players within the academy.
   - name: User Roles & Permissions 🔑
     description: Operations related to managing staff roles and permissions.
-  - name: Applications 📱
+  - name: Academies 🏫
     description: Operations related to managing padel academies.
   - name: Customizations ⚙️
     description: Operations related to customizing features and settings.
