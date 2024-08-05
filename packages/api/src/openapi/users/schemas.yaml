@@ -1,0 +1,103 @@
+PostUserRequestBody:
+  type: object
+  properties:
+    name:
+      type: string
+      description: The name of the user.
+      example: John Doe
+    email:
+      type: string
+      description: The email address of the user.
+      example: john.doe@example.com
+    password:
+      type: string
+      description: The password for the user account.
+      example: strongpassword123
+    roleType:
+      type: string
+      description: The role of the user within the account.
+      enum:
+        - ACCOUNT_ADMIN
+        - APPLICATION_USER
+    userType:
+      type: string
+      description: The type of user.
+      enum:
+        - MANAGER
+        - INSTRUCTOR
+        - PLAYER
+    enabled:
+      type: boolean
+      description: Indicates whether the account is enabled.
+      default: true
+      example: true
+  required:
+    - name
+    - email
+    - password
+    - roleType
+    - userType
+    - enabled
+  additionalProperties: false
+
+UserResponse:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier of the created user.
+      example: 123456
+    createdAt:
+      type: string
+      format: date-time
+      description: The creation date of the user.
+      example: 2024-08-04T12:34:56Z
+    updatedAt:
+      type: string
+      format: date-time
+      description: The last update date of the user.
+      example: 2024-08-04T12:34:56Z
+    accountId:
+      type: string
+      description: The account's id of the user.
+    name:
+      type: string
+      description: The name of the user.
+      example: John Doe
+    email:
+      type: string
+      description: The email address of the user.
+      example: john.doe@example.com
+    roleType:
+      type: string
+      description: The role of the user within the account.
+      enum:
+        - ACCOUNT_ADMIN
+        - APPLICATION_USER
+    userType:
+      type: string
+      description: The type of user.
+      enum:
+        - MANAGER
+        - INSTRUCTOR
+        - PLAYER
+    image:
+      type: string
+      description: The image profile of the user.
+      nullable: true
+    enabled:
+      type: boolean
+      description: Indicates whether the user is enabled.
+      example: true
+  required:
+    - id
+    - createdAt
+    - updatedAt
+    - accountId
+    - name
+    - email
+    - roleType
+    - userType
+    - image
+    - enabled
+  additionalProperties: false

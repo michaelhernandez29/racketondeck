@@ -1,0 +1,58 @@
+/accounts/{accountId}/users:
+  post:
+    tags:
+      - Users 👨‍🏫
+    summary: Create a new user in an account
+    description: Endpoint to create a new user associated with a specific account.
+    x-eov-operation-handler: userController
+    operationId: create
+    parameters:
+      - name: accountId
+        in: path
+        description: The account's id.
+        required: true
+        schema:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PostUserRequestBody'
+      required: true
+    responses:
+      201:
+        description: Successful operation.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statusCode:
+                  type: integer
+                  description: The status code of the response.
+                  example: 201
+                message:
+                  type: string
+                  description: A message indicating the result of the operation.
+                  example: Created
+                  default: Created
+                data:
+                  $ref: '#/components/schemas/UserResponse'
+              required:
+                - statusCode
+                - message
+                - data
+              additionalProperties: false
+      400:
+        $ref: '#/components/responses/BadRequestResponse'
+      401:
+        $ref: '#/components/responses/UnauthorizedResponse'
+      403:
+        $ref: '#/components/responses/ForbiddenResponse'
+      404:
+        $ref: '#/components/responses/NotFoundResponse'
+      409:
+        $ref: '#/components/responses/ConflictResponse'
+      500:
+        $ref: '#/components/responses/InternalServerErrorResponse'

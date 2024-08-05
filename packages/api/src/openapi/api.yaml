@@ -1,0 +1,80 @@
+openapi: '3.0.3'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: /v1
+tags:
+  - name: Accounts 📝
+    description: Operations related to managing user accounts.
+  - name: User Authentication 🔐
+    description: Operations related to managing user authentication and security.
+  - name: Users 👨‍🏫
+    description: Operations related to managing staff members and players within the academy.
+  - name: User Roles & Permissions 🔑
+    description: Operations related to managing staff roles and permissions.
+  - name: Academies 🏫
+    description: Operations related to managing padel academies.
+  - name: Customizations ⚙️
+    description: Operations related to customizing features and settings.
+  - name: Courts 🎾
+    description: Operations related to managing courts within academies.
+  - name: Court Conditions 🏞️
+    description: Operations related to updating and managing court conditions.
+  - name: Bookings 📅
+    description: Operations related to booking padel courts and managing reservations.
+  - name: Tournaments 🏆
+    description: Operations related to organizing and managing tournaments.
+  - name: Notifications 🔔
+    description: Operations related to sending and managing notifications.
+  - name: Memberships 🏷️
+    description: Operations related to managing membership plans and subscriptions.
+  - name: Reports 📊
+    description: Operations related to generating and viewing reports.
+  - name: Events 🎉
+    description: Operations related to managing events and special activities.
+  - name: Feedback 🗣️
+    description: Operations related to collecting and managing user feedback.
+  - name: Support 🛠️
+    description: Operations related to providing customer support and handling inquiries.
+  - name: Inventory 📦
+    description: Operations related to managing inventory and equipment.
+  - name: Schedules 📅
+    description: Operations related to managing schedules for courts, instructors, and events.
+  - name: Training Programs 🏋️‍♂️
+    description: Operations related to creating and managing training programs.
+  - name: News 📰
+    description: Operations related to publishing and managing news articles.
+  - name: Sponsorships 🤝
+    description: Operations related to managing sponsorship deals and partnerships.
+  - name: Merchandise 🛍️
+    description: Operations related to managing and selling merchandise.
+  - name: Leaderboards 🥇
+    description: Operations related to managing and displaying player leaderboards.
+  - name: Community Forums 💬
+    description: Operations related to managing community forums and discussions.
+  - name: Lost & Found 🕵️‍♂️
+    description: Operations related to managing lost and found items.
+  - name: Surveys 📋
+    description: Operations related to creating and managing surveys.
+  - name: Equipment Rentals 👕
+    description: Operations related to managing rental of equipment.
+  - name: Volunteer Management 🙋‍♂️
+    description: Operations related to managing volunteers for events and programs.
+  - name: Data Analytics 📊
+    description: Operations related to analyzing data for insights and improvements.
+  - name: External Integrations 🔗
+    description: Operations related to integrating with external systems and services.
+paths:
+  !!inc/dir [ '.', { whitelist: 'paths', blacklist: ['api', 'schemas', 'responses'] }]
+components:
+  securitySchemes:
+    ApiGateway:
+      type: apiKey
+      description: Auth from api-gateway service
+      name: authorization
+      in: header
+  schemas:
+    !!inc/dir [ '.', { whitelist: 'schemas', blacklist: ['api', 'paths', 'responses'] }]
+  responses:
+    !!inc/dir [ '.', { whitelist: 'responses', blacklist: ['api', 'paths', 'schemas']}]
