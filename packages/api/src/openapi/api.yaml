@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: StuCode API
+  description: |
+    Test
+  version: 1.0.0
+servers:
+  - url: /v1
+tags:
+  - name: Test
+    description: Test
+
+paths:
+  !!inc/dir ['.', { whitelist: 'paths', blacklist: ['api', 'schemas', 'requestBodies', 'responses'] }]
+components:
+  schemas:
+    !!inc/dir ['.', { whitelist: 'schemas', blacklist: ['api', 'paths', 'requestBodies', 'responses'] }]
+  responses:
+    !!inc/dir ['.', { whitelist: 'responses', blacklist: ['api', 'paths', 'schemas', 'requestBodies'] }]

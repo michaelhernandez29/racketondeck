@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API",
+      "port": 9227,
+      "request": "attach",
+      "type": "node",
+      "restart": true
+    }
+  ]
+}

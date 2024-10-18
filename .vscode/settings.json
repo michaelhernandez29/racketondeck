@@ -1,0 +1,22 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "javascript.format.semicolons": "insert",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "prettier.tabWidth": 2,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+    "source.removeUnusedImports": "always",
+    "source.sortImports": "always"
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "prettier.printWidth": 120,
+  "editor.rulers": [120],
+  "prettier.singleQuote": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.trimAutoWhitespace": true
+}
