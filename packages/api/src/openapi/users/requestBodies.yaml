@@ -1,0 +1,106 @@
+UserPostRequestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: |
+              The full name of the user. This will be displayed across the platform and should reflect the user's
+              real or preferred name.
+            example: 'John Doe'
+          email:
+            type: string
+            description: |
+              The user's email address. This will be used for login, notifications, and account recovery.
+              It must be unique across the system.
+            example: 'john.doe@example.com'
+          password:
+            type: string
+            description: |
+              The password for the user's account. It should follow security best practices, such as using a
+              combination of letters, numbers, and special characters.
+            example: 'securePassword123!'
+          role:
+            type: string
+            enum:
+              - admin
+              - manager
+              - coordinator
+              - instructor
+              - player
+            description: |
+              The role of the user within the system. This defines the permissions and areas of the platform
+              the user has access to.
+            example: 'player'
+          phoneNumber:
+            type: integer
+            description: |
+              The user's phone number for contact purposes. This may be used for notifications or support.
+            example: 1234567890
+          profilePicture:
+            type: string
+            description: |
+              The URL to the user's profile picture. This will be displayed in their profile and other
+              areas where their avatar is shown.
+            example: 'https://example.com/images/profile/johndoe.png'
+          enabled:
+            type: boolean
+            description: |
+              Indicates whether the user's account is active or disabled. If disabled, the user will not
+              be able to log in or access the platform.
+            default: true
+        additionalProperties: false
+        required:
+          - name
+          - email
+          - password
+          - role
+
+
+UserPutRequestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: |
+              The full name of the user. This will be displayed across the platform and should reflect the user's
+              real or preferred name.
+            example: 'John Doe'
+          role:
+            type: string
+            enum:
+              - admin
+              - manager
+              - coordinator
+              - instructor
+              - player
+            description: |
+              The role of the user within the system. This defines the permissions and areas of the platform
+              the user has access to.
+            example: 'player'
+          phoneNumber:
+            type: integer
+            description: |
+              The user's phone number for contact purposes. This may be used for notifications or support.
+            example: 1234567890
+          profilePicture:
+            type: string
+            description: |
+              The URL to the user's profile picture. This will be displayed in their profile and other
+              areas where their avatar is shown.
+            example: 'https://example.com/images/profile/johndoe.png'
+          enabled:
+            type: boolean
+            description: |
+              Indicates whether the user's account is active or disabled. If disabled, the user will not
+              be able to log in or access the platform.
+            default: true
+        additionalProperties: false
+

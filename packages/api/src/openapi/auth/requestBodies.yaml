@@ -1,0 +1,23 @@
+LoginRequestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            description: |
+              The email address associated with the account. This should be unique and will be used for notifications
+              and account recovery.
+            example: 'contact@superracketacademy.com'
+          password:
+            type: string
+            description: |
+              The password for the account. It should meet security requirements to ensure the account's safety.
+            example: 'securePassword123!'
+        additionalProperties: false
+        required:
+          - email
+          - password
+

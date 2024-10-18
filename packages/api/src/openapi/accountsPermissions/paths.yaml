@@ -1,0 +1,130 @@
+/accounts/{accountId}/users/{userId}/permissions:
+  post:
+    tags:
+      - User Roles & Permissions 🔑
+    summary: Create a new account permission 🆕
+    description: |
+      Creates a new permission for a specific user within the given account. This endpoint allows an authenticated
+      user (usually an admin) to grant permissions such as 'READ', 'WRITE', or 'ADMIN' to a user in the account.
+    x-eov-operation-handler: accountPermissionController
+    operationId: create
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account to which the permission will be associated.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: userId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the user to whom the permission will be granted.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440111'
+    requestBody:
+      $ref: '#/components/requestBodies/AccountPermissionPostRequestBody'
+    responses:
+      201:
+        $ref: '#/components/responses/AccountPermissionCreated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  get:
+    tags:
+      - User Roles & Permissions 🔑
+    summary: Get user permissions within an account 🔍
+    description: |
+      Retrieves the list of permissions assigned to a specific user within the given account. This endpoint allows an
+      authenticated user to view what permissions, such as 'READ', 'WRITE', or 'ADMIN', have been granted to a user in
+      the account.
+    x-eov-operation-handler: accountPermissionController
+    operationId: findAndCountAllByUserId
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account from which the permissions will be retrieved.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: userId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the user whose permissions will be retrieved.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440111'
+    responses:
+      200:
+        $ref: '#/components/responses/UserPermissionsRetrieved'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+
+/accounts/{accountId}/users/{userId}/permissions/{permissionId}:
+  delete:
+    tags:
+      - User Roles & Permissions 🔑
+    summary: Delete a user's permission within an account 🗑️
+    description: |
+      Deletes a specific permission assigned to a user within a given account. This operation is usually performed by an admin to revoke a user's access or privileges.
+    x-eov-operation-handler: accountPermissionController
+    operationId: remove
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: userId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the user whose permission is to be deleted.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440111'
+      - name: permissionId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the permission to be deleted.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440222'
+    responses:
+      204:
+        $ref: '#/components/responses/NoContent'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

@@ -1,0 +1,24 @@
+/accounts:
+  post:
+    security: []
+    tags:
+      - Accounts 📝
+    summary: Create a new account 🆕
+    description: |
+      Creates a new account for an academy, allowing the management of users and academies.
+
+      Each account can have multiple users and academies, with customizable permissions for accessing specific
+      academies. 📚
+    x-eov-operation-handler: accountController
+    operationId: create
+    requestBody:
+      $ref: '#/components/requestBodies/AccountPostRequestBody'
+    responses:
+      201:
+        $ref: '#/components/responses/AccountCreated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      409:
+        $ref: '#/components/responses/Conflict'
+      500:
+        $ref: '#/components/responses/InternalServerError'

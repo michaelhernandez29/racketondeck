@@ -1,0 +1,92 @@
+Academy:
+  type: object
+  properties:
+    id:
+      type: string
+      format: uuid
+      description: |
+        The unique identifier for the academy, represented as a UUID (Universally Unique Identifier).
+        This ID is automatically generated when the academy is created.
+      example: 550e8400-e29b-41d4-a716-446655440000
+    accountId:
+      type: string
+      format: uuid
+      description: |
+        The unique identifier for the account associated with the academy.
+        This ID references the account entity that owns the academy.
+      example: 550e8400-e29b-41d4-a716-446655440111
+    createdAt:
+      type: string
+      format: date-time
+      description: |
+        The date and time when the academy was created. It is stored in ISO 8601 format.
+      example: 2024-10-04T12:35:43.030Z
+    updatedAt:
+      type: string
+      format: date-time
+      description: |
+        The date and time when the academy was last updated. It is stored in ISO 8601 format.
+      example: 2024-10-04T12:35:43.030Z
+    name:
+      type: string
+      description: The name of the academy.
+      example: Elite Padel Academy
+    description:
+      type: string
+      description: A short description of the academy.
+      example: A leading academy focused on training professional padel players.
+      nullable: true
+    city:
+      type: string
+      description: The city where the academy is located.
+      example: Madrid
+      nullable: true
+    country:
+      type: string
+      description: The country where the academy is located.
+      example: Spain
+      nullable: true
+    phoneNumber:
+      type: string
+      description: The contact phone number for the academy.
+      example: '+34 612345678'
+      nullable: true
+    email:
+      type: string
+      format: email
+      description: The email address of the academy.
+      example: 'info@elitepadelacademy.com'
+      nullable: true
+    website:
+      type: string
+      description: The website of the academy.
+      example: 'https://www.elitepadelacademy.com'
+      nullable: true
+    profilePicture:
+      type: string
+      description: |
+        The URL to the academy's profile picture. This will be displayed in the academy's profile and other relevant sections of the platform.
+      nullable: true
+      example: 'https://example.com/images/profile/johndoe.png'
+    enabled:
+      type: boolean
+      description: |
+        Indicates whether the academy is currently active.
+        If `true`, the academy is enabled and can be accessed.
+        If `false`, the academy is disabled.
+      example: true
+  additionalProperties: false
+  required:
+    - id
+    - accountId
+    - createdAt
+    - updatedAt
+    - name
+    - description
+    - city
+    - country
+    - phoneNumber
+    - email
+    - website
+    - profilePicture
+    - enabled

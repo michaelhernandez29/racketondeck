@@ -1,0 +1,250 @@
+/academies/{academyId}/courts:
+  post:
+    tags:
+      - Courts 🎾
+    summary: Create a new court 🆕
+    description: |
+      Creates a new court in the RacketOnDeck platform. This endpoint allows an authenticated user to register a new
+      court by providing details such as name, type, and availability.
+    x-eov-operation-handler: courtController
+    operationId: create
+    parameters:
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to retrieve.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+    requestBody:
+      $ref: '#/components/requestBodies/CourtPostRequestBody'
+    responses:
+      201:
+        $ref: '#/components/responses/CourtCreated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  get:
+    tags:
+      - Courts 🎾
+    summary: Retrieve courts for a specific academy 📋
+    description: |
+      Retrieves a list of courts associated with a specific academy. This endpoint returns all courts that belong
+      to the academy identified by the provided academyId.
+    x-eov-operation-handler: courtController
+    operationId: findAndCountAll
+    parameters:
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to retrieve.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+      - name: page
+        in: query
+        required: false
+        description: The page number for pagination.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        description: The number of results to return per page.
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      - name: find
+        in: query
+        description: A search term to filter results.
+        required: false
+        schema:
+          type: string
+          default: ''
+        allowReserved: true
+      - name: order
+        in: query
+        description: >
+          Order of the results based on the court's name:
+
+            - `a-z` - Order by name ascending. From A to Z
+            - `z-a` - Order by name descending. From Z to A
+        required: false
+        schema:
+          type: string
+          enum:
+            - a-z
+            - z-a
+          default: a-z
+    responses:
+      200:
+        description: Successfully retrieved list of courts
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statusCode:
+                  type: integer
+                  format: int64
+                  description: HTTP status code indicating successful operation.
+                  default: 200
+                message:
+                  type: string
+                  description: Descriptive message of the operation.
+                  default: OK
+                count:
+                  type: integer
+                  description: The total number of courts found.
+                  example: 3
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Court'
+              required:
+                - statusCode
+                - message
+                - count
+                - data
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+
+/academies/{academyId}/courts/{courtId}:
+  get:
+    tags:
+      - Courts 🎾
+    summary: Retrieve a specific court for a given academy 📋
+    description: |
+      Retrieves details of a specific court by its unique identifier (courtId) for the given academy (academyId).
+    x-eov-operation-handler: courtController
+    operationId: findById
+    parameters:
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to which the court belongs.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+      - name: courtId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the court to retrieve.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440222'
+    responses:
+      200:
+        $ref: '#/components/responses/CourtRetrieved'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  put:
+    tags:
+      - Courts 🎾
+    summary: Update an existing court ✏️
+    description: |
+      Updates the details of an existing court in the RacketOnDeck platform. This endpoint allows an authenticated
+      user to modify the name, surface type, indoor/outdoor status, sport, and current status of the specified court.
+    x-eov-operation-handler: courtController
+    operationId: update
+    parameters:
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to which the court belongs.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+      - name: courtId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the court to update.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440222'
+    requestBody:
+      $ref: '#/components/requestBodies/CourtPutRequestBody'
+    responses:
+      200:
+        $ref: '#/components/responses/CourtUpdated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  delete:
+    tags:
+      - Courts 🎾
+    summary: Delete an existing court 🗑️
+    description: |
+      Deletes a specified court from the RacketOnDeck platform. This endpoint allows an authenticated user to remove
+      a court identified by the courtId from the academy identified by the academyId.
+    x-eov-operation-handler: courtController
+    operationId: remove
+    parameters:
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to which the court belongs.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+      - name: courtId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the court to delete.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440222'
+    responses:
+      204:
+        $ref: '#/components/responses/NoContent'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

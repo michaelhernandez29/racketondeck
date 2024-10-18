@@ -1,0 +1,79 @@
+AccountCreated:
+  description: Account successfully created
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int64
+            description: HTTP status code indicating successful operation.
+            default: 201
+          message:
+            type: string
+            description: Descriptive message of the operation.
+            default: Created
+          data:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                description: |
+                  The unique identifier for the account, represented as a UUID (Universally Unique Identifier).
+                  This ID is automatically generated when the account is created.
+                example: 550e8400-e29b-41d4-a716-446655440000
+              createdAt:
+                type: string
+                format: date-time
+                description: |
+                  The date and time when the account was created. It is stored in ISO 8601 format (e.g., `2024-10-04T12:35:43.030Z`).
+                example: 2024-10-04T12:35:43.030Z
+              updatedAt:
+                type: string
+                format: date-time
+                description: |
+                  The date and time when the account was last updated. It is stored in ISO 8601 format (e.g., `2024-10-04T12:35:43.030Z`).
+                example: 2024-10-04T12:35:43.030Z
+              name:
+                type: string
+                description: |
+                  The name of the user or the academy being registered.
+                  This can represent the name of an individual or an organization,
+                  such as a padel academy or club.
+                example: Padel Academy
+              type:
+                type: string
+                enum:
+                  - free
+                  - pro
+                  - premium
+                description: |
+                  The payment plan for the account. The options are:
+
+                  - free: Access to basic features.
+                  - pro: Access to advanced features.
+                  - premium: Full access to all platform features.
+                example: free
+              enabled:
+                type: boolean
+                description: |
+                  Indicates whether the account is currently active.
+                  If `true`, the account is enabled and can access the platform.
+                  If `false`, the account is disabled and cannot be used until re-enabled.
+                example: true
+            additionalProperties: false
+            required:
+              - id
+              - createdAt
+              - updatedAt
+              - name
+              - enabled
+              - type
+        additionalProperties: false
+        required:
+          - statusCode
+          - message
+          - data
+

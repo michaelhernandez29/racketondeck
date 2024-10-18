@@ -1,0 +1,64 @@
+Court:
+  type: object
+  properties:
+    id:
+      type: string
+      format: uuid
+      description: |
+        The unique identifier for the court, represented as a UUID (Universally Unique Identifier).
+        This ID is automatically generated when the court is created.
+      example: 550e8400-e29b-41d4-a716-446655440000
+    academyId:
+      type: string
+      format: uuid
+      description: |
+        The unique identifier for the academy associated with the court.
+        This ID references the academy entity that owns the court.
+      example: 550e8400-e29b-41d4-a716-446655440111
+    createdAt:
+      type: string
+      format: date-time
+      description: |
+        The date and time when the court was created. It is stored in ISO 8601 format.
+      example: 2024-10-04T12:35:43.030Z
+    updatedAt:
+      type: string
+      format: date-time
+      description: |
+        The date and time when the court was last updated. It is stored in ISO 8601 format.
+      example: 2024-10-04T12:35:43.030Z
+    name:
+      type: string
+      description: The name of the court.
+      example: 'Court 1'
+    surface:
+      type: string
+      description: The type of surface of the court (e.g., Clay, Grass, Hard).
+      example: 'Clay'
+    isIndoor:
+      type: boolean
+      description: Indicates if the court is indoor (true) or outdoor (false).
+      example: true
+    sport:
+      type: string
+      description: The sport that can be played on the court (e.g., Padel, Tennis).
+      example: 'Padel'
+    status:
+      type: string
+      description: The current status of the court (e.g., occupied, available, maintenance).
+      enum:
+        - occupied
+        - available
+        - maintenance
+      example: 'available'
+  additionalProperties: false
+  required:
+    - id
+    - academyId
+    - createdAt
+    - updatedAt
+    - name
+    - surface
+    - isIndoor
+    - sport
+    - status

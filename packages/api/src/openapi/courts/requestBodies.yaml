@@ -1,0 +1,89 @@
+CourtPostRequestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: The name of the court.
+            example: 'Court 1'
+          surface:
+            type: string
+            description: The type of surface of the court.
+            enum:
+              - Clay
+              - Grass
+              - Hard
+            example: Clay
+          isIndoor:
+            type: boolean
+            description: Indicates if the court is indoor (true) or outdoor (false).
+            example: true
+          sport:
+            type: string
+            description: The sport that can be played on the court.
+            enum:
+              - Padel
+              - Tennis
+              - Squash
+              - Badminton
+              - Pickleball
+          status:
+            type: string
+            description: The current status of the court (e.g., occupied, available, maintenance).
+            enum:
+              - occupied
+              - available
+              - maintenance
+            example: 'available'
+        additionalProperties: false
+        required:
+          - name
+          - surface
+          - isIndoor
+          - sport
+          - status
+
+CourtPutRequestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: The name of the court.
+            example: 'Court 1'
+          surface:
+            type: string
+            description: The type of surface of the court.
+            enum:
+              - Clay
+              - Grass
+              - Hard
+            example: Clay
+          isIndoor:
+            type: boolean
+            description: Indicates if the court is indoor (true) or outdoor (false).
+            example: true
+          sport:
+            type: string
+            description: The sport that can be played on the court.
+            enum:
+              - Padel
+              - Tennis
+              - Squash
+              - Badminton
+              - Pickleball
+          status:
+            type: string
+            description: The current status of the court (e.g., occupied, available, maintenance).
+            enum:
+              - occupied
+              - available
+              - maintenance
+            example: 'available'
+        additionalProperties: false

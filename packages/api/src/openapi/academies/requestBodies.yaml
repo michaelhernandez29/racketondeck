@@ -1,0 +1,92 @@
+AcademyPostRequestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: The name of the academy.
+            example: 'Elite Padel Academy'
+          description:
+            type: string
+            description: A short description of the academy (optional).
+            example: 'A leading academy focused on training professional padel players.'
+          city:
+            type: string
+            description: The city where the academy is located (optional).
+            example: 'Madrid'
+          country:
+            type: string
+            description: The country where the academy is located (optional).
+            example: 'Spain'
+          phoneNumber:
+            type: string
+            description: The contact phone number for the academy (optional).
+            example: '+34 612345678'
+          email:
+            type: string
+            format: email
+            description: The email address of the academy (optional).
+            example: 'info@elitepadelacademy.com'
+          website:
+            type: string
+            description: The website of the academy (optional).
+            example: 'https://www.elitepadelacademy.com'
+          profilePicture:
+            type: string
+            description: The URL of the academy’s profile picture (optional).
+            example: 'https://www.example.com/academy/profile.jpg'
+          enabled:
+            type: boolean
+            description: Whether the academy is active or not (default is true).
+            default: true
+        additionalProperties: false
+        required:
+          - name
+
+AcademyPutRequestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: The name of the academy.
+            example: 'Elite Padel Academy'
+          description:
+            type: string
+            description: A short description of the academy (optional).
+            example: 'A leading academy focused on training professional padel players.'
+          city:
+            type: string
+            description: The city where the academy is located (optional).
+            example: 'Madrid'
+          country:
+            type: string
+            description: The country where the academy is located (optional).
+            example: 'Spain'
+          phoneNumber:
+            type: string
+            description: The contact phone number for the academy (optional).
+            example: '+34 612345678'
+          email:
+            type: string
+            format: email
+            description: The email address of the academy (optional).
+            example: 'info@elitepadelacademy.com'
+          website:
+            type: string
+            description: The website of the academy (optional).
+            example: 'https://www.elitepadelacademy.com'
+          profilePicture:
+            type: string
+            description: The URL of the academy’s profile picture (optional).
+            example: 'https://www.example.com/academy/profile.jpg'
+          enabled:
+            type: boolean
+            description: Whether the academy is active or not (default is true).
+            default: true
+        additionalProperties: false

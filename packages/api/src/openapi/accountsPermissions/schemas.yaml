@@ -1,0 +1,52 @@
+AccountPermission:
+  type: object
+  properties:
+    id:
+      type: string
+      format: uuid
+      description: |
+        The unique identifier for the permission, represented as a UUID (Universally Unique Identifier).
+        This ID is automatically generated when the permission is created.
+      example: 550e8400-e29b-41d4-a716-446655440000
+    createdAt:
+      type: string
+      format: date-time
+      description: |
+        The date and time when the permission was created. It is stored in ISO 8601 format.
+      example: 2024-10-04T12:35:43.030Z
+    updatedAt:
+      type: string
+      format: date-time
+      description: |
+        The date and time when the permission was last updated. It is stored in ISO 8601 format.
+      example: 2024-10-04T12:35:43.030Z
+    accountId:
+      type: string
+      format: uuid
+      description: |
+        The unique identifier for the account associated with this permission.
+        This ID references the account entity that owns the permission.
+      example: 550e8400-e29b-41d4-a716-446655440111
+    userId:
+      type: string
+      format: uuid
+      description: |
+        The unique identifier for the user associated with this permission.
+        This ID references the user entity that is granted the permission.
+      example: 450e8400-e29b-41d4-a716-446655440222
+    permission:
+      type: string
+      enum:
+        - read
+        - write
+        - admin
+      description: The level of access being granted to the user.
+      example: admin
+  additionalProperties: false
+  required:
+    - id
+    - createdAt
+    - updatedAt
+    - accountId
+    - userId
+    - permission

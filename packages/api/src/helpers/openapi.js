@@ -29,32 +29,26 @@ const loadSpec = (filePath) => {
   const result = {
     ...obj,
     paths: Object.assign(..._(obj.paths).values().map('paths').value()),
-    components: {
-      ...obj.components,
-      schemas: {},
-      responses: {},
-    },
+    components: { ...obj.components },
   };
 
   // When using !!inc/dir, included schemas are inside an object with the name of folder
   // Example { /integration: [scheme1, scheme2], /inbox: [scheme3, scheme4] }
   const schemas = _(obj.components.schemas).values().map('schemas').value();
+  const requestBodies = _(obj.components.requestBodies).values().map('requestBodies').value();
   const responses = _(obj.components.responses).values().map('responses').value();
 
   if (schemas.length) {
     result.components.schemas = Object.assign(...schemas);
   }
 
+  if (requestBodies.length) {
+    result.components.requestBodies = Object.assign(...requestBodies);
+  }
+
   if (responses.length) {
     result.components.responses = Object.assign(...responses);
   }
-
-  /**
-   * For debugging purposes only
-   * Allow to get complete YAML file to debug complete API definition.
-   * Remember to disable this in production!
-   */
-  // fs.writeFileSync('test.yaml', jsYaml.dump(result));
 
   return result;
 };

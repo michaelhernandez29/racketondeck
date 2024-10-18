@@ -43,6 +43,27 @@ Created:
           - message
         additionalProperties: false
 
+NoContent:
+  description: No Content
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int64
+            description: HTTP status code indicating that the request was successful but there is no content to return.
+            default: 204
+          message:
+            type: string
+            description: Descriptive message indicating that the operation was successful but no content is returned.
+            default: No content
+        required:
+          - statusCode
+          - message
+        additionalProperties: false
+
 BadRequest:
   description: Bad Request
   content:
@@ -63,7 +84,7 @@ BadRequest:
             type: string
             enum:
               - BAD_REQUEST
-            description: >
+            description: |
               Possible error codes:
 
               - `BAD_REQUEST`: Indicates a bad request error.'
@@ -93,7 +114,7 @@ Unauthorized:
             type: string
             enum:
               - UNAUTHORIZED
-            description: >
+            description: |
               Possible error codes:
 
               - `UNAUTHORIZED`: Indicates an unauthorized error.'
@@ -123,7 +144,7 @@ Forbidden:
             type: string
             enum:
               - FORBIDDEN
-            description: >
+            description: |
               Possible error codes:
 
               - `FORBIDDEN`: Indicates a forbidden error.'
@@ -153,10 +174,18 @@ NotFound:
             type: string
             enum:
               - NOT_FOUND
-            description: >
+              - ACCOUNT_NOT_FOUND
+              - USER_NOT_FOUND
+              - ACADEMY_NOT_FOUND
+              - COURT_NOT_FOUND
+            description: |
               Possible error codes:
 
-              - `NOT_FOUND`: Indicates a not found error.'
+              - `NOT_FOUND`: Indicates that the requested resource was not found.
+              - `ACCOUNT_NOT_FOUND`: Indicates that the specified account was not found in the system.
+              - `USER_NOT_FOUND`: Indicates that the specified user was not found in the system.
+              - `ACADEMY_NOT_FOUND`: Indicates that the specified academy was not found in the system.
+              - `COURT_NOT_FOUND`: Indicates that the specified court was not found in the system.
         required:
           - statusCode
           - message
@@ -183,7 +212,7 @@ Conflict:
             type: string
             enum:
               - CONFLICT
-            description: >
+            description: |
               Possible error codes:
 
               - `CONFLICT`: Indicates a conflict error.'
@@ -213,7 +242,7 @@ InternalServerError:
             type: string
             enum:
               - INTERNAL_SERVER_ERROR
-            description: >
+            description: |
               Possible error codes:
 
               - `INTERNAL_SERVER_ERROR`: Indicates an error.'

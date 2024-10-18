@@ -1,0 +1,250 @@
+/accounts/{accountId}/academies:
+  post:
+    tags:
+      - Academies 🏫
+    summary: Create a new academy 🆕
+    description: |
+      Creates a new academy in the RacketOnDeck platform. This endpoint allows an authenticated user to register a new
+      academy by providing details such as name, description, and contact information.
+    x-eov-operation-handler: academyController
+    operationId: create
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account to which the academies belong.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+    requestBody:
+      $ref: '#/components/requestBodies/AcademyPostRequestBody'
+    responses:
+      201:
+        $ref: '#/components/responses/AcademyCreated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  get:
+    tags:
+      - Academies 🏫
+    summary: Retrieve academies for a specific account 📋
+    description: |
+      Retrieves a list of academies associated with a specific account. This endpoint returns all academies that belong
+      to the account identified by the provided accountId.
+    x-eov-operation-handler: academyController
+    operationId: findAndCountAll
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account to which the academies belong.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: page
+        in: query
+        required: false
+        description: The page number for pagination.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        description: The number of results to return per page.
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      - name: find
+        in: query
+        description: A search term to filter results.
+        required: false
+        schema:
+          type: string
+          default: ''
+        allowReserved: true
+      - name: order
+        in: query
+        description: >
+          Order of the results based on the academy's name:
+
+            - `a-z` - Order by name ascending. From A to Z
+            - `z-a` - Order by name descending. From Z to A
+        required: false
+        schema:
+          type: string
+          enum:
+            - a-z
+            - z-a
+          default: a-z
+    responses:
+      200:
+        description: Successfully retrieved list of academies
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statusCode:
+                  type: integer
+                  format: int64
+                  description: HTTP status code indicating successful operation.
+                  default: 200
+                message:
+                  type: string
+                  description: Descriptive message of the operation.
+                  default: OK
+                count:
+                  type: integer
+                  description: The total number of academies found.
+                  example: 3
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Academy'
+              required:
+                - statusCode
+                - message
+                - count
+                - data
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+
+/accounts/{accountId}/academies/{academyId}:
+  get:
+    tags:
+      - Academies 🏫
+    summary: Retrieve a specific academy for a given account 🏫
+    description: |
+      Retrieves details of a specific academy by its unique identifier (academyId) for the given account (accountId).
+    x-eov-operation-handler: academyController
+    operationId: findById
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account to which the academy belongs.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to retrieve.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+    responses:
+      200:
+        $ref: '#/components/responses/AcademyRetrieved'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  put:
+    tags:
+      - Academies 🏫
+    summary: Update an existing academy ✏️
+    description: |
+      Updates the details of an existing academy in the RacketOnDeck platform. This endpoint allows an authenticated
+      user to modify the name, description, and contact information of the specified academy.
+    x-eov-operation-handler: academyController
+    operationId: update
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account to which the academy belongs.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to update.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+    requestBody:
+      $ref: '#/components/requestBodies/AcademyPutRequestBody'
+    responses:
+      200:
+        $ref: '#/components/responses/AcademyUpdated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  delete:
+    tags:
+      - Academies 🏫
+    summary: Delete an existing academy 🗑️
+    description: |
+      Deletes a specified academy from the RacketOnDeck platform. This endpoint allows an authenticated user to remove
+      an academy identified by the academyId from the account identified by the accountId.
+    x-eov-operation-handler: academyController
+    operationId: remove
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account to which the academy belongs.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to delete.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+    responses:
+      204:
+        $ref: '#/components/responses/NoContent'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

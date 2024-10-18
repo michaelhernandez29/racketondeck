@@ -1,0 +1,18 @@
+AccountPermissionPostRequestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          permission:
+            type: string
+            enum:
+              - read
+              - write
+              - admin
+            description: The level of access being granted to the user.
+            example: admin
+        additionalProperties: false
+        required:
+          - permission

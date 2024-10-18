@@ -1,0 +1,88 @@
+User:
+  type: object
+  properties:
+    id:
+      type: string
+      format: uuid
+      description: |
+        The unique identifier for the user, represented as a UUID (Universally Unique Identifier).
+        This ID is automatically generated when the user is created.
+      example: 123e4567-e89b-12d3-a456-426614174000
+    accountId:
+      type: string
+      format: uuid
+      description: |
+        The unique identifier of the account to which the user belongs. This is a UUID that links the user
+        to the specific account in the system.
+      example: 550e8400-e29b-41d4-a716-446655440000
+    createdAt:
+      type: string
+      format: date-time
+      description: |
+        The date and time when the user account was created. Stored in ISO 8601 format (e.g., `2024-10-04T12:35:43.030Z`).
+      example: 2024-10-04T12:35:43.030Z
+    updatedAt:
+      type: string
+      format: date-time
+      description: |
+        The date and time when the user account was last updated. Stored in ISO 8601 format (e.g., `2024-10-04T12:35:43.030Z`).
+      example: 2024-10-04T12:35:43.030Z
+    name:
+      type: string
+      description: |
+        The full name of the user. This will be displayed across the platform, including in their profile and account settings.
+      example: John Doe
+    email:
+      type: string
+      description: |
+        The email address of the user. This email will be used for login and notifications, and must be unique.
+      example: johndoe@example.com
+    role:
+      type: string
+      enum:
+        - owner
+        - admin
+        - manager
+        - coordinator
+        - instructor
+        - player
+      description: |
+        The role assigned to the user, which defines their permissions and access levels on the platform.
+        Possible roles include:
+
+        - owner: Ultimate authority over the platform, with full control over all settings, users, and permissions.
+        - admin: Full platform access.
+        - manager: Manage teams or accounts.
+        - coordinator: Organize and coordinate activities.
+        - instructor: Manage and coach players.
+        - player: User with access to player-specific features.
+      example: player
+    phoneNumber:
+      type: string
+      description: |
+        The phone number of the user. It can be used for account recovery or notifications.
+      nullable: true
+      example: "+1234567890"
+    profilePicture:
+      type: string
+      description: |
+        The URL to the user's profile picture. This will be displayed in the user's profile and other relevant sections of the platform.
+      nullable: true
+      example: 'https://example.com/images/profile/johndoe.png'
+    enabled:
+      type: boolean
+      description: |
+        Indicates whether the user account is active. If `true`, the user can access the platform; if `false`, the account is disabled.
+      example: true
+  additionalProperties: false
+  required:
+    - id
+    - accountId
+    - createdAt
+    - updatedAt
+    - name
+    - email
+    - role
+    - phoneNumber
+    - profilePicture
+    - enabled

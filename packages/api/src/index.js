@@ -4,7 +4,6 @@ import compression from 'compression';
 import cors from 'cors';
 import * as openapiValidator from 'express-openapi-validator';
 import helmet from 'helmet';
-import morgan from 'morgan';
 import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 import url from 'url';
@@ -12,8 +11,10 @@ import url from 'url';
 import logger from './helpers/logger.js';
 import openapi from './helpers/openapi.js';
 import postgres from './lib/databases/postgres.js';
+import authHandler from './middlewares/authHandler.js';
 import errorHandler from './middlewares/errorHandler.js';
 import esmResolver from './middlewares/esmResolver.js';
+import requestHandler from './middlewares/requestHandler.js';
 
 import config from './config/index.js';
 const appConfig = config.app;
@@ -33,20 +34,8 @@ try {
   app.use(helmet());
   app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'] }));
   app.use(compression());
-  app.use(
-    morgan((tokens, req, res) => {
-      return JSON.stringify({
-        method: tokens.method(req, res),
-        url: tokens.url(req, res),
-        status: tokens.status(req, res),
-        responseTime: `${tokens['response-time'](req, res)} ms`,
-        contentLength: tokens.res(req, res, 'content-length'),
-        userAgent: tokens['user-agent'](req, res),
-        date: tokens.date(req, res, 'iso'),
-        remoteAddr: tokens['remote-addr'](req, res),
-      });
-    }),
-  );
+
+  app.use(requestHandler);
 
   app.use('/v1/api-docs', swaggerUi.serve, swaggerUi.setup(apiSpecContent));
   app.use(
@@ -58,6 +47,11 @@ try {
       operationHandlers: {
         basePath: path.join(__dirname, 'controllers'),
         resolver: esmResolver,
+      },
+      validateSecurity: {
+        handlers: {
+          Bearer: authHandler,
+        },
       },
     }),
   );

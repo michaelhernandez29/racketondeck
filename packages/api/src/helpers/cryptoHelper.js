@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import config from '../config/config.js';
+import config from '../config/index.js';
 const bcryptConfig = config.crypto.bcrypt;
 const jwtConfig = config.crypto.jwt;
 

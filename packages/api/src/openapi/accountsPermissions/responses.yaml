@@ -1,0 +1,54 @@
+AccountPermissionCreated:
+  description: Permission successfully created
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int64
+            description: HTTP status code indicating successful operation.
+            default: 201
+          message:
+            type: string
+            description: Descriptive message indicating the operation's success.
+            default: Created
+          data:
+            $ref: '#/components/schemas/AccountPermission'
+        additionalProperties: false
+        required:
+          - statusCode
+          - message
+          - data
+
+UserPermissionsRetrieved:
+  description: Permission successfully created
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int64
+            description: HTTP status code indicating successful operation.
+            default: 200
+          message:
+            type: string
+            description: Descriptive message indicating the operation's success.
+            default: OK
+          count:
+            type: integer
+            format: int64
+            description: The total number of permissions found.
+            default: 1
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/AccountPermission'
+        additionalProperties: false
+        required:
+          - statusCode
+          - message
+          - data

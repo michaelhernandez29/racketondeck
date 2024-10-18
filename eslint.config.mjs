@@ -1,4 +1,5 @@
 import pluginJs from '@eslint/js';
+import pluginJsdoc from 'eslint-plugin-jsdoc';
 import pluginReact from 'eslint-plugin-react';
 import globals from 'globals';
 
@@ -36,14 +37,13 @@ export default [
   { files: ['**/*.{js,mjs,cjs,jsx}'] },
   {
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
-  },
-  pluginJs.configs.recommended,
-  pluginReact.configs.flat.recommended,
-  {
+    plugins: { jsdoc: pluginJsdoc },
     rules: {
       'react/react-in-jsx-scope': 'off',
       ...jsdocRules,
       ...nodeRules,
     },
   },
+  pluginJs.configs.recommended,
+  pluginReact.configs.flat.recommended,
 ];

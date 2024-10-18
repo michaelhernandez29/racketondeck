@@ -1,0 +1,47 @@
+AccountPostRequestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: |
+              The name of the academy account. This should be a unique name that represents the academy and will
+              be visible to users.
+            example: 'Super Racket Academy'
+          email:
+            type: string
+            description: |
+              The email address associated with the account. This should be unique and will be used for notifications
+              and account recovery.
+            example: 'contact@superracketacademy.com'
+          password:
+            type: string
+            description: |
+              The password for the account. It should meet security requirements to ensure the account's safety.
+            example: 'securePassword123!'
+          type:
+            type: string
+            enum:
+              - free
+              - pro
+              - premium
+            description: |
+              The payment plan for the account. The options are:
+
+              - free: Access to basic features.
+              - pro: Access to advanced features.
+              - premium: Full access to all platform features.
+            default: free
+          enabled:
+            type: boolean
+            description: Indicates whether the account is enabled or disabled.
+            default: true
+        additionalProperties: false
+        required:
+          - name
+          - email
+          - password
+          - type

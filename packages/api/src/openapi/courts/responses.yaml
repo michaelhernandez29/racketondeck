@@ -1,0 +1,71 @@
+CourtCreated:
+  description: Court successfully created
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int64
+            description: HTTP status code indicating successful operation.
+            default: 201
+          message:
+            type: string
+            description: Descriptive message of the operation.
+            default: Created
+          data:
+            $ref: '#/components/schemas/Court'
+        additionalProperties: false
+        required:
+          - statusCode
+          - message
+          - data
+
+CourtRetrieved:
+  description: Court successfully retrieved
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int64
+            description: HTTP status code indicating successful operation.
+            default: 200
+          message:
+            type: string
+            description: Descriptive message of the operation.
+            default: OK
+          data:
+            $ref: '#/components/schemas/Court'
+        additionalProperties: false
+        required:
+          - statusCode
+          - message
+          - data
+
+CourtUpdated:
+  description: Court successfully updated
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int64
+            description: HTTP status code indicating successful operation.
+            default: 200
+          message:
+            type: string
+            description: Descriptive message of the operation.
+            default: OK
+          data:
+            $ref: '#/components/schemas/Court'
+        additionalProperties: false
+        required:
+          - statusCode
+          - message
+          - data

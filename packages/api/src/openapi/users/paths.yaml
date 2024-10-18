@@ -1,0 +1,258 @@
+/accounts/{accountId}/users:
+  post:
+    tags:
+      - Users 👨‍🏫
+    summary: Create a new user 🆕
+    description: |
+      Creates a new user within the specified account. This allows the management of users under a single account.
+
+      Each account can have multiple users with different roles such as admin, manager, instructor, and player,
+      each with customizable permissions based on their role. Users can manage account settings, access specific
+      features, and perform actions according to their assigned role.
+    x-eov-operation-handler: userController
+    operationId: create
+    parameters:
+      - name: accountId
+        in: path
+        description: The unique identifier (UUID) of the account in which the new user will be created.
+        required: true
+        schema:
+          type: string
+          example: '550e8400-e29b-41d4-a716-446655440000'
+    requestBody:
+      $ref: '#/components/requestBodies/UserPostRequestBody'
+    responses:
+      201:
+        $ref: '#/components/responses/UserCreated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      409:
+        $ref: '#/components/responses/Conflict'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  get:
+    tags:
+      - Users 👨‍🏫
+    summary: Retrieve a list of users for the specified account 🗂️
+    description: |
+      Retrieves a list of users for the specified account, applying pagination, search and sorting filters if provided.
+    x-eov-operation-handler: userController
+    operationId: findAndCountAll
+    parameters:
+      - name: page
+        in: query
+        description: The page number for pagination.
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      - name: limit
+        in: query
+        description: The limit of results per page.
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 20
+      - name: find
+        in: query
+        description: A search term to filter results.
+        required: false
+        schema:
+          type: string
+          default: ''
+        allowReserved: true
+      - name: order
+        in: query
+        description: >
+          Order of the results based on the user's name:
+
+            - `a-z` - Order by name ascending. From A to Z
+            - `z-a` - Order by name descending. From Z to A
+        required: false
+        schema:
+          type: string
+          enum:
+            - a-z
+            - z-a
+          default: a-z
+      - name: type
+        in: query
+        description: The user type to filter.
+        required: false
+        schema:
+          type: string
+          enum:
+            - owner
+            - admin
+            - manager
+            - coordinator
+            - instructor
+            - player
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statusCode:
+                  type: integer
+                  format: int64
+                  description: HTTP status code indicating a successful operation.
+                  default: 200
+                message:
+                  type: string
+                  description: Descriptive message of the operation.
+                  default: OK
+                count:
+                    type: integer
+                    format: int64
+                    description: The total number of users found.
+                    default: 1
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/User'
+              required:
+                - statusCode
+                - message
+                - count
+                - data
+              additionalProperties: false
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+
+/accounts/{accountId}/users/{userId}:
+  get:
+    tags:
+      - Users 👨‍🏫
+    summary: Retrieve a specific user 🕵️‍♂️
+    description: |
+      Retrieves detailed information for a specific user within the specified account. This allows you to view details like the user's role, personal information, and permissions within the account.
+
+      Each account can have multiple users with different roles such as admin, manager, instructor, and player, each having different levels of access and responsibilities.
+    x-eov-operation-handler: userController
+    operationId: findById
+    parameters:
+      - name: accountId
+        in: path
+        description: The unique identifier (UUID) of the account to which the user belongs.
+        required: true
+        schema:
+          type: string
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: userId
+        in: path
+        description: The unique identifier (UUID) of the user to retrieve.
+        required: true
+        schema:
+          type: string
+          example: 'e58e8400-e29b-41d4-a716-446655440001'
+    responses:
+      200:
+        $ref: '#/components/responses/UserRetrieved'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  put:
+    tags:
+      - Users 👨‍🏫
+    summary: Update an existing user 🔄
+    description: |
+      Updates an existing user within the specified account. This allows modifications to the user's details, such as their role or personal information.
+
+      Each account can have multiple users with different roles such as admin, manager, instructor, and player, and these roles can be updated based on the user's responsibilities.
+    x-eov-operation-handler: userController
+    operationId: update
+    parameters:
+      - name: accountId
+        in: path
+        description: The unique identifier (UUID) of the account to which the user belongs.
+        required: true
+        schema:
+          type: string
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: userId
+        in: path
+        description: The unique identifier (UUID) of the user to be updated.
+        required: true
+        schema:
+          type: string
+          example: 'e58e8400-e29b-41d4-a716-446655440001'
+    requestBody:
+      $ref: '#/components/requestBodies/UserPutRequestBody'
+    responses:
+      200:
+        $ref: '#/components/responses/UserUpdated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
+  delete:
+    tags:
+      - Users 👨‍🏫
+    summary: Delete a specific user 🗑️
+    description: |
+      Deletes a specific user from the specified account. This action removes the user and all their associated data from the account.
+
+      Be cautious, as this operation is irreversible and will permanently delete the user from the system.
+    x-eov-operation-handler: userController
+    operationId: remove
+    parameters:
+      - name: accountId
+        in: path
+        description: The unique identifier (UUID) of the account to which the user belongs.
+        required: true
+        schema:
+          type: string
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: userId
+        in: path
+        description: The unique identifier (UUID) of the user to be deleted.
+        required: true
+        schema:
+          type: string
+          example: 'e58e8400-e29b-41d4-a716-446655440001'
+    responses:
+      204:
+        $ref: '#/components/responses/NoContent'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

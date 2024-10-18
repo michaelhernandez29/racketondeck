@@ -1,19 +1,169 @@
-openapi: 3.0.0
+openapi: '3.0.3'
 info:
-  title: StuCode API
+  title: API Title
+  version: '1.0'
   description: |
-    Test
-  version: 1.0.0
+    Welcome to the **RacketOnDeck API**! 🚀✨
+
+    The **RacketOnDeck API** is your all-in-one solution for managing every aspect of racket sports academies. This powerful API is designed to streamline operations for administrators, coaches, and players, ensuring a seamless and engaging experience for all users. From managing player profiles to organizing tournaments, the RacketOnDeck API has everything you need to run a successful academy. 🏅🎉
+
+    ### Key Features:
+
+    - **User Management**:
+      - Easily create, update, and delete user profiles for players and staff members. 📝
+      - Manage user authentication with secure token-based systems, ensuring the safety of sensitive information. 🔐
+      - Implement role-based access controls to tailor user experiences based on their roles, whether as players, coaches, or administrators. 🧑‍🏫
+
+    - **Player Management**:
+      - Track player progress and skill levels through comprehensive profiles. 📊
+      - Allow players to manage their own profiles, making it easy to keep information current and accurate. 🆕
+      - Provide feedback and recommendations based on player performance to help them improve their skills. 🎯
+
+    - **Staff Management**:
+      - Assign and manage roles for coaches and administrative staff to ensure responsibilities are clear and efficient. 👩‍🏫
+      - Facilitate staff training and onboarding with dedicated resources accessible through the API. 📚
+
+    - **Court Management**:
+      - Maintain detailed records of court availability, allowing players to check for openings in real-time. 🏟️
+      - Enable quick bookings and cancellations to maximize court utilization and player satisfaction. 📅
+      - Update court conditions and maintenance schedules to ensure facilities are always in optimal condition. 🛠️
+
+    - **Bookings Management**:
+      - Streamline the booking process for courts, enabling players to easily reserve time slots. 📅
+      - Send automated reminders for upcoming bookings to reduce no-shows and improve scheduling efficiency. 📬
+      - Track booking history for players to monitor their usage patterns and preferences. 📊
+
+    - **Tournaments & Events**:
+      - Organize and manage tournaments with comprehensive scheduling tools, allowing for easy match organization and tracking. 🏆
+      - Provide real-time updates and notifications to participants about match schedules and results. 🥳
+      - Generate tournament brackets and leaderboards to foster friendly competition and enhance engagement. 📈
+
+    - **Notifications**:
+      - Implement real-time notifications to keep users informed about important updates, such as court availability changes or upcoming events. 🔔
+      - Use push notifications and in-app alerts to ensure users never miss critical information. 📲
+
+    - **Custom Reports**:
+      - Generate detailed reports for player performance, attendance, and booking statistics, providing insights for better decision-making. 📊
+      - Use these reports to assess the effectiveness of training programs and identify areas for improvement. 🏅
+
+    - **Membership Management**:
+      - Handle various membership plans and subscriptions, allowing users to choose options that best fit their needs. 🏷️
+      - Track membership renewals and automate billing processes to enhance user retention. 💳
+
+    - **Feedback Collection**:
+      - Create channels for collecting user feedback and suggestions, helping to continually improve services. 🗣️
+      - Analyze feedback data to identify trends and make data-driven decisions. 📈
+
+    - **Community Engagement**:
+      - Facilitate community forums and discussion boards to foster interaction among players, coaches, and fans. 💬
+      - Organize events and social gatherings to enhance community spirit and engagement. 🎉
+
+    - **Inventory Management**:
+      - Manage equipment and supplies inventory, ensuring that all necessary items are available for use. 📦
+      - Track usage and maintenance of equipment to optimize resource allocation. 🔧
+
+    - **External Integrations**:
+      - Seamlessly integrate with third-party services for payments, communications, and more, expanding functionality. 🔗
+      - Utilize APIs from social media platforms to enhance marketing and engagement efforts. 📱
+
+    - **Data Analytics**:
+      - Implement advanced data analytics features to assess performance metrics and user engagement levels. 📈
+      - Use insights gained from data to improve programs and services offered by the academy. 🔍
+
+    - **Customer Support**:
+      - Provide support channels for users to address inquiries and resolve issues effectively. 🛠️
+      - Utilize a ticketing system to track and manage support requests. 📩
+
+    - **Scalable Architecture**:
+      - Built on modern technologies like **Express**, **PostgreSQL**, and **MongoDB**, ensuring high performance and reliability. ⚡
+      - Seamless integration with **Google Cloud** and **Kubernetes** for deployment and scalability, making it easy to handle increased traffic and data demands. ☁️
+
+    Get ready to elevate your racket sports experience! 🙌 With the RacketOnDeck API, you have all the tools you need to run an effective and engaging academy, empowering players and staff alike to reach their fullest potential. Join us today and transform the way you manage racket sports! 🎾🏸
+
 servers:
   - url: /v1
+    description: Production server 🏗️
+
 tags:
-  - name: Test
-    description: Test
+  - name: Accounts 📝
+    description: Operations related to managing user accounts.
+  - name: User Authentication 🔐
+    description: Operations related to managing user authentication and security.
+  - name: Users 👨‍🏫
+    description: Operations related to managing staff members within the academy.
+  - name: User Roles & Permissions 🔑
+    description: Operations related to managing staff roles and permissions.
+  - name: Academies 🏫
+    description: Operations related to managing academies.
+  - name: Customizations ⚙️
+    description: Operations related to customizing features and settings.
+  - name: Courts 🎾
+    description: Operations related to managing courts within academies.
+  - name: Court Conditions 🏞️
+    description: Operations related to updating and managing court conditions.
+  - name: Bookings 📅
+    description: Operations related to booking padel courts and managing reservations.
+  - name: Tournaments 🏆
+    description: Operations related to organizing and managing tournaments.
+  - name: Notifications 🔔
+    description: Operations related to sending and managing notifications.
+  - name: Memberships 🏷️
+    description: Operations related to managing membership plans and subscriptions.
+  - name: Reports 📊
+    description: Operations related to generating and viewing reports.
+  - name: Events 🎉
+    description: Operations related to managing events and special activities.
+  - name: Feedback 🗣️
+    description: Operations related to collecting and managing user feedback.
+  - name: Support 🛠️
+    description: Operations related to providing customer support and handling inquiries.
+  - name: Inventory 📦
+    description: Operations related to managing inventory and equipment.
+  - name: Schedules 📅
+    description: Operations related to managing schedules for courts, instructors, and events.
+  - name: Training Programs 🏋️‍♂️
+    description: Operations related to creating and managing training programs.
+  - name: News 📰
+    description: Operations related to publishing and managing news articles.
+  - name: Sponsorships 🤝
+    description: Operations related to managing sponsorship deals and partnerships.
+  - name: Merchandise 🛍️
+    description: Operations related to managing and selling merchandise.
+  - name: Leaderboards 🥇
+    description: Operations related to managing and displaying player leaderboards.
+  - name: Community Forums 💬
+    description: Operations related to managing community forums and discussions.
+  - name: Lost & Found 🕵️‍♂️
+    description: Operations related to managing lost and found items.
+  - name: Surveys 📋
+    description: Operations related to creating and managing surveys.
+  - name: Equipment Rentals 👕
+    description: Operations related to managing rental of equipment.
+  - name: Volunteer Management 🙋‍♂️
+    description: Operations related to managing volunteers for events and programs.
+  - name: Data Analytics 📊
+    description: Operations related to analyzing data for insights and improvements.
+  - name: External Integrations 🔗
+    description: Operations related to integrating with external systems and services.
 
 paths:
-  !!inc/dir ['.', { whitelist: 'paths', blacklist: ['api', 'schemas', 'requestBodies', 'responses'] }]
+  !!inc/dir [ '.', { whitelist: 'paths', blacklist: ['api', 'schemas', 'requestBodies', 'responses'] }]
+
+security:
+  - Bearer: []
+
 components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: |
+        The Bearer authentication scheme is used for securing API requests by including an access token.
+        The token must be provided in the `Authorization` header in the format `Bearer <token>`.
+      name: authorization
+      in: header
   schemas:
-    !!inc/dir ['.', { whitelist: 'schemas', blacklist: ['api', 'paths', 'requestBodies', 'responses'] }]
+    !!inc/dir [ '.', { whitelist: 'schemas', blacklist: ['api', 'paths', 'requestBodies', 'responses'] }]
+  requestBodies:
+    !!inc/dir [ '.', { whitelist: 'requestBodies', blacklist: ['api', 'paths', 'schemas', 'responses'] }]
   responses:
-    !!inc/dir ['.', { whitelist: 'responses', blacklist: ['api', 'paths', 'schemas', 'requestBodies'] }]
+    !!inc/dir [ '.', { whitelist: 'responses', blacklist: ['api', 'paths', 'schemas', 'requestBodies']}]
